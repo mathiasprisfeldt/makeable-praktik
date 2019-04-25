@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MakeablePraktik</string>
+    <string name="send_button_desc">Send button</string>
+    <string name="message_hint">Aa</string>
 </resources>
