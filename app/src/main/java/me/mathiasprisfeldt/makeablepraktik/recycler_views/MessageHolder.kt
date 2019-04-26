@@ -10,5 +10,8 @@ class MessageHolder internal constructor(private val view: View) : RecyclerView.
     internal fun setModel(data: Message) {
         val txt = view.findViewById<TextView>(R.id.message_text)
         txt.text = data.msg
+
+        val author = view.findViewById<TextView>(R.id.message_author)
+        author?.text = data.authorText
     }
 }

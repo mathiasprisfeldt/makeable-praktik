@@ -2,4 +2,6 @@
     <string name="app_name">MakeablePraktik</string>
     <string name="send_button_desc">Send button</string>
     <string name="message_hint">Aa</string>
+    <string name="main_activity_chatroom_field_hint">Chatroom</string>
+    <string name="main_activity_login_text">Start chatting</string>
 </resources>

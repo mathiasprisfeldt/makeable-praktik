@@ -4,7 +4,10 @@ import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 
-class MessageService(private val user: String) {
+class MessageService(
+    private val user: String,
+    private val chatRoom: String
+) {
     private val db = FirebaseFirestore.getInstance()
 
     public val messages = db.collection("messages").orderBy("date", Query.Direction.ASCENDING)
@@ -17,5 +20,9 @@ class MessageService(private val user: String) {
         )
 
         db.collection("messages").document().set(msg)
+    }
+
+    fun isUs(msg: Message): Boolean {
+        return user == msg.from
     }
 }

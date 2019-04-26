@@ -13,20 +13,23 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="Hejsa"
+            android:text="Message"
             android:background="@drawable/message_txt_bg"
-            android:padding="8dp"
+            android:padding="@dimen/chat_msg_padding"
+            android:maxWidth="@dimen/chat_msg_max_width"
             app:layout_constraintHorizontal_bias="0">
 
     </TextView>
 
     <TextView
+            android:id="@+id/message_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="00-00-000"
+            android:text="AUTHOR"
             app:layout_constraintTop_toBottomOf="@+id/message_text"
             app:layout_constraintStart_toStartOf="@+id/message_text"
             android:layout_marginStart="8dp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
     />
 
 </android.support.constraint.ConstraintLayout>

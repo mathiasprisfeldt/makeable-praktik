@@ -1,9 +1,10 @@
 package me.mathiasprisfeldt.makeablepraktik
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,6 +21,8 @@ class MainActivity : AppCompatActivity() {
         home_login_btn.setOnClickListener {
             onLogin()
         }
+
+        chatroom_spinner.adapter
     }
 
     private fun onLogin() {

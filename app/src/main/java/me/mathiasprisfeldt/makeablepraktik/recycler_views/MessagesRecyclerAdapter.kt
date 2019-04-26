@@ -6,15 +6,21 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
-import kotlinx.android.synthetic.main.activity_chat.*
 import me.mathiasprisfeldt.makeablepraktik.Message
+import me.mathiasprisfeldt.makeablepraktik.MessageService
 import me.mathiasprisfeldt.makeablepraktik.R
 
 class MessagesRecyclerAdapter internal constructor(
     options: FirestoreRecyclerOptions<Message>,
     private val messages: RecyclerView,
-    private val layoutManager: LinearLayoutManager
+    private val layoutManager: LinearLayoutManager,
+    private val msgService: MessageService
 ) : FirestoreRecyclerAdapter<Message, MessageHolder>(options) {
+
+    companion object {
+        const val TYPE_OUR_MSG = 0
+        const val TYPE_THEIR_MSG = 1
+    }
 
     private var atBottom: Boolean = true
 
@@ -45,12 +51,21 @@ class MessagesRecyclerAdapter internal constructor(
         })
     }
 
+    override fun getItemViewType(position: Int): Int {
+        return if (msgService.isUs(getItem(position))) TYPE_OUR_MSG else TYPE_THEIR_MSG
+    }
+
     override fun onBindViewHolder(productViewHolder: MessageHolder, position: Int, productModel: Message) {
         productViewHolder.setModel(productModel)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.chat_message, parent, false)
+        val layout = when(viewType) {
+            TYPE_OUR_MSG -> R.layout.chat_message_us
+            else -> R.layout.chat_message_them
+        }
+
+        val view = LayoutInflater.from(parent.context).inflate(layout, parent, false)
         return MessageHolder(view)
     }
 }

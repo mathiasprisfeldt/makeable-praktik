@@ -44,7 +44,7 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
         messages.layoutManager = layoutManager
 
         val recyclerOptions = FirestoreRecyclerOptions.Builder<Message>().setQuery(msgService.messages, Message::class.java).build()
-        msgRecyclerAdapter = MessagesRecyclerAdapter(recyclerOptions, messages, layoutManager)
+        msgRecyclerAdapter = MessagesRecyclerAdapter(recyclerOptions, messages, layoutManager, msgService)
         messages.adapter = msgRecyclerAdapter
     }
 
