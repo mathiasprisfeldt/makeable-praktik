@@ -3,6 +3,7 @@ package me.mathiasprisfeldt.makeablepraktik
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import kotlinx.android.synthetic.main.activity_chat.*
 
@@ -25,6 +26,8 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         send.setOnClickListener(this)
+
+        messages.layoutManager = LinearLayoutManager(this)
     }
 
     override fun onClick(p0: View?) {
