@@ -6,15 +6,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
-import me.mathiasprisfeldt.makeablepraktik.Message
-import me.mathiasprisfeldt.makeablepraktik.MessageService
+import me.mathiasprisfeldt.makeablepraktik.types.Message
+import me.mathiasprisfeldt.makeablepraktik.ChatService
 import me.mathiasprisfeldt.makeablepraktik.R
 
 class MessagesRecyclerAdapter internal constructor(
     options: FirestoreRecyclerOptions<Message>,
     private val messages: RecyclerView,
     private val layoutManager: LinearLayoutManager,
-    private val msgService: MessageService
+    private val msgService: ChatService
 ) : FirestoreRecyclerAdapter<Message, MessageHolder>(options) {
 
     companion object {

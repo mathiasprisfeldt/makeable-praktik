@@ -1,4 +1,4 @@
-package me.mathiasprisfeldt.makeablepraktik
+package me.mathiasprisfeldt.makeablepraktik.types
 
 import com.google.firebase.Timestamp
 import me.mathiasprisfeldt.makeablepraktik.extensions.format

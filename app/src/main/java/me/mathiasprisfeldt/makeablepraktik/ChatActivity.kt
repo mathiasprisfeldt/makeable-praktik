@@ -7,26 +7,32 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import kotlinx.android.synthetic.main.activity_chat.*
+import kotlinx.android.synthetic.main.activity_main.*
 import me.mathiasprisfeldt.makeablepraktik.recycler_views.MessagesRecyclerAdapter
-import android.support.v7.widget.RecyclerView
-
+import me.mathiasprisfeldt.makeablepraktik.types.Message
 
 
 class ChatActivity : AppCompatActivity(), View.OnClickListener {
-    private lateinit var msgService: MessageService
+    private lateinit var msgService: ChatService
     private lateinit var username: String
+    private lateinit var chatRoom: String
     private lateinit var msgRecyclerAdapter: MessagesRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
 
-        username = intent?.getStringExtra(MainActivity.UsernameExtra) ?: return run {
-            // If username is null return to login screen
-            startActivity(Intent(this, MainActivity::class.java))
+        // If both username and chat room is empty something is wrong and return to main activity.
+        intent?.let {
+            username = it.getStringExtra(MainActivity.UsernameExtra)
+            chatRoom = it.getStringExtra(MainActivity.ChatRoomExtra)
+
+            if (username.isEmpty() || chatRoom.isEmpty()) {
+                startActivity(Intent(this, MainActivity::class.java))
+            }
         }
 
-        msgService = MessageService(username)
+        msgService = ChatService(username, chatRoom)
 
         supportActionBar?.title = "Chatting as $username"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
