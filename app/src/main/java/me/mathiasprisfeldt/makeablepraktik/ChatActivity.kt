@@ -65,7 +65,10 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(p0: View?) {
-        chatService.send(msg.text.toString())
+        val text = msg.text.toString()
+        if (text.isBlank()) return
+
+        chatService.send(text)
         msg.text.clear()
     }
 

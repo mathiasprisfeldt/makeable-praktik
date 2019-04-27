@@ -2,4 +2,7 @@
 <resources>
     <dimen name="chat_msg_max_width">300dp</dimen>
     <dimen name="chat_msg_padding">8dp</dimen>
+    <dimen name="screen_border_margin">16dp</dimen>
+    <dimen name="screen_border_margin_halfed">8dp</dimen>
+    <dimen name="chat_message_spacing">8dp</dimen>
 </resources>
