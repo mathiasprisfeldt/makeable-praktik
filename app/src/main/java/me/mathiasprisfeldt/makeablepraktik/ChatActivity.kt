@@ -7,13 +7,13 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import kotlinx.android.synthetic.main.activity_chat.*
-import kotlinx.android.synthetic.main.activity_main.*
 import me.mathiasprisfeldt.makeablepraktik.recycler_views.MessagesRecyclerAdapter
+import me.mathiasprisfeldt.makeablepraktik.services.ChatService
 import me.mathiasprisfeldt.makeablepraktik.types.Message
 
 
 class ChatActivity : AppCompatActivity(), View.OnClickListener {
-    private lateinit var msgService: ChatService
+    private lateinit var chatService: ChatService
     private lateinit var username: String
     private lateinit var chatRoom: String
     private lateinit var msgRecyclerAdapter: MessagesRecyclerAdapter
@@ -32,9 +32,9 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
 
-        msgService = ChatService(username, chatRoom)
+        chatService = ChatService(username, chatRoom)
 
-        supportActionBar?.title = "Chatting as $username"
+        supportActionBar?.title = chatRoom
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         // Send msg when pressing send button or action button in keyboard
@@ -49,8 +49,8 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
         }
         messages.layoutManager = layoutManager
 
-        val recyclerOptions = FirestoreRecyclerOptions.Builder<Message>().setQuery(msgService.messages, Message::class.java).build()
-        msgRecyclerAdapter = MessagesRecyclerAdapter(recyclerOptions, messages, layoutManager, msgService)
+        val recyclerOptions = FirestoreRecyclerOptions.Builder<Message>().setQuery(chatService.messages, Message::class.java).build()
+        msgRecyclerAdapter = MessagesRecyclerAdapter(recyclerOptions, messages, layoutManager, chatService)
         messages.adapter = msgRecyclerAdapter
     }
 
@@ -65,7 +65,7 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(p0: View?) {
-        msgService.send(msg.text.toString())
+        chatService.send(msg.text.toString())
         msg.text.clear()
     }
 

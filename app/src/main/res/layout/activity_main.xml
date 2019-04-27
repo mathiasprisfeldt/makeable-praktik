@@ -18,14 +18,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/chatroom_selector"
-            app:layout_constraintVertical_chainStyle="packed">
+            app:layout_constraintVertical_chainStyle="packed"
+            android:hint="Username"
+    >
 
         <EditText
                 android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:hint="Username"/>
+                android:inputType="textPersonName"
+                android:hint="Username"
+                android:imeOptions="actionNext"
+        />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -37,8 +41,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/usernameWrapper"
-            android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/home_login_btn"
+            app:layout_constraintBottom_toTopOf="@+id/home_login_btn"
+            android:layout_marginBottom="8dp"
             android:hint="@string/main_activity_chatroom_field_hint"
+            android:maxLines="1"
+            android:imeOptions="actionGo"
+            android:inputType="textAutoComplete"
     />
 
     <Button

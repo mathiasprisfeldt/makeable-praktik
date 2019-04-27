@@ -1,8 +1,10 @@
-package me.mathiasprisfeldt.makeablepraktik
+package me.mathiasprisfeldt.makeablepraktik.services
 
+import android.arch.lifecycle.MutableLiveData
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import me.mathiasprisfeldt.makeablepraktik.types.ChatRoom
 import me.mathiasprisfeldt.makeablepraktik.types.Message
 
 class ChatService(
@@ -12,13 +14,17 @@ class ChatService(
     private val db = FirebaseFirestore.getInstance()
 
     val messages = db.collection("chatRooms/$chatRoom/messages").orderBy("date", Query.Direction.ASCENDING)
-    var chatRooms: List<String> = emptyList()
+    var chatRooms: MutableLiveData<List<String>> = MutableLiveData()
 
     init {
-        db.collection("chatRooms").addSnapshotListener { snapshot, exception ->
+        db.collection("chatRooms").addSnapshotListener { snapshot, _ ->
             snapshot?.documents?.let {
-                chatRooms = it.map { elem -> elem["name"] as String }
+                chatRooms.postValue(it.map { elem -> elem.id })
             }
+        }
+
+        chatRoom?.let {
+            db.collection("chatRooms").document(chatRoom).set(ChatRoom())
         }
     }
 

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import me.mathiasprisfeldt.makeablepraktik.types.Message
-import me.mathiasprisfeldt.makeablepraktik.ChatService
+import me.mathiasprisfeldt.makeablepraktik.services.ChatService
 import me.mathiasprisfeldt.makeablepraktik.R
 
 class MessagesRecyclerAdapter internal constructor(
