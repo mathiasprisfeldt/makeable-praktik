@@ -5,8 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.EditText
@@ -17,10 +15,28 @@ import me.mathiasprisfeldt.makeablepraktik.services.ChatService
 
 class MainActivity : AppCompatActivity() {
     private var chatService = ChatService()
+    private lateinit var chatRoomAdapter: ArrayAdapter<String>
+
+    private var cachedChatRooms: List<String> = emptyList()
+    set(value) {
+        if (value.isEmpty()) return
+
+        chatRoomAdapter.clear()
+        chatRoomAdapter.addAll(value)
+        chatRoomAdapter.notifyDataSetChanged()
+
+        field = value
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        chatRoomAdapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_list_item_1,
+            ArrayList<String>()
+        )
 
         username.requestFocus()
         username.setOnEditorActionListener { v, actionId, event ->
@@ -37,26 +53,26 @@ class MainActivity : AppCompatActivity() {
             onLogin()
         }
 
-        val adapter = ArrayAdapter(
-            this,
-            android.R.layout.simple_list_item_1,
-            ArrayList<String>()
-        )
-
         chatService.chatRooms.observe(this, Observer {
-            it?.run {
-                adapter.clear()
-                adapter.addAll(it)
-                adapter.notifyDataSetChanged()
-            }
+            if (chatroom_selector.isPopupShowing) return@Observer
+
+            cachedChatRooms = it ?: emptyList()
         })
 
         chatroom_selector.apply {
-            setAdapter(adapter)
+            setAdapter(this@MainActivity.chatRoomAdapter)
             threshold = 1
 
             setOnFocusChangeListener { _, hasFocus ->
                 if (hasFocus && text.isNullOrEmpty() && error.isNullOrEmpty()) showDropDown()
+            }
+
+            setOnDismissListener {
+                chatService.chatRooms.value?.let {
+                    if (it == cachedChatRooms) return@setOnDismissListener
+
+                    cachedChatRooms = it
+                }
             }
         }
 
