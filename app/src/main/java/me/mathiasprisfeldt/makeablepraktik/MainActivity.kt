@@ -87,17 +87,23 @@ class MainActivity : AppCompatActivity() {
 
     private fun onLogin() {
         var hasError = false
-        var shouldHaveFocus: EditText?
+        var shouldHaveFocus: EditText? = null
 
-        val chatRoomText: String = chatroom_selector.validateNotEmpty().let {
-            shouldHaveFocus = chatroom_selector
-            hasError = !it.second || hasError
+        val chatRoomText: String = chatroom_selector.validateNotEmpty("Chat room cant be empty").let {
+            if (!it.second) {
+                shouldHaveFocus = chatroom_selector
+                hasError = true
+            }
+
             it.first
         }
 
         val usernameTxt: String = username.validateNotEmpty("Username cant be empty").let {
-            shouldHaveFocus = username
-            hasError = !it.second || hasError
+            if (!it.second) {
+                shouldHaveFocus = username
+                hasError = true
+            }
+
             it.first
         }
 

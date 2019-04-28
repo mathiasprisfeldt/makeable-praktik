@@ -2,11 +2,16 @@ package me.mathiasprisfeldt.makeablepraktik
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
+import android.renderscript.ScriptGroup
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.View
+import android.view.WindowManager
+import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import kotlinx.android.synthetic.main.activity_chat.*
@@ -44,10 +49,10 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
         send.setOnClickListener(this)
 
         // If the msg text field loses focus, hide the keyboard
-        msg.setOnFocusChangeListener { _, hasFocus ->
+        msg.setOnFocusChangeListener { v, hasFocus ->
             if (!hasFocus) {
                 val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
+                imm.hideSoftInputFromWindow(v.windowToken, 0)
             }
         }
 

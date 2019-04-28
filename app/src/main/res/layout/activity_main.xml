@@ -29,7 +29,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/logo"
-            app:layout_constraintBottom_toTopOf="@+id/chatroom_selector"
+            app:layout_constraintBottom_toTopOf="@+id/chatroom_selector_wrapper"
     >
 
         <EditText
@@ -43,30 +43,40 @@
 
     </android.support.design.widget.TextInputLayout>
 
-    <AutoCompleteTextView
-            android:id="@+id/chatroom_selector"
+    <android.support.design.widget.TextInputLayout
+            android:id="@+id/chatroom_selector_wrapper"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:layout_marginBottom="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/usernameWrapper"
             app:layout_constraintBottom_toTopOf="@+id/home_login_btn"
-            android:layout_marginBottom="8dp"
-            android:hint="@string/main_activity_chatroom_field_hint"
-            android:maxLines="1"
-            android:imeOptions="actionGo"
-            android:inputType="textAutoComplete"
-            app:layout_constraintEnd_toStartOf="@+id/home_show_chatroom_list"/>
+            app:layout_constraintEnd_toStartOf="@+id/home_show_chatroom_list"
+    >
+
+        <AutoCompleteTextView
+                android:id="@+id/chatroom_selector"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/main_activity_chatroom_field_hint"
+                android:maxLines="1"
+                android:imeOptions="actionGo"
+                android:inputType="textAutoComplete"
+        />
+
+    </android.support.design.widget.TextInputLayout>
+
 
     <ImageButton
             android:id="@+id/home_show_chatroom_list"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            app:layout_constraintStart_toEndOf="@+id/chatroom_selector"
+            app:layout_constraintStart_toEndOf="@+id/chatroom_selector_wrapper"
             android:src="@drawable/ic_arrow_drop_down_circle_black_35dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/chatroom_selector"
-            app:layout_constraintBottom_toBottomOf="@+id/chatroom_selector"
+            app:layout_constraintTop_toTopOf="@+id/chatroom_selector_wrapper"
+            app:layout_constraintBottom_toBottomOf="@+id/chatroom_selector_wrapper"
             android:layout_marginEnd="8dp"
             android:tint="@color/colorAccent"
             android:background="?attr/selectableItemBackgroundBorderless"
@@ -82,7 +92,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
             app:layout_constraintVertical_bias="0.0"
-            app:layout_constraintTop_toBottomOf="@+id/chatroom_selector"
+            app:layout_constraintTop_toBottomOf="@+id/chatroom_selector_wrapper"
             app:layout_constraintBottom_toBottomOf="parent"
             style="@style/Base.Widget.AppCompat.Button.Colored"
     />
