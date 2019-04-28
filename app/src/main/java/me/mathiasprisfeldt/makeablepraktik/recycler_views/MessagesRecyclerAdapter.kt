@@ -1,7 +1,9 @@
 package me.mathiasprisfeldt.makeablepraktik.recycler_views
 
+import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.ContextMenu
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
@@ -17,7 +19,8 @@ class MessagesRecyclerAdapter internal constructor(
     options: FirestoreRecyclerOptions<Message>,
     private val messages: RecyclerView,
     private val layoutManager: LinearLayoutManager,
-    private val msgService: ChatService
+    private val msgService: ChatService,
+    private val context: Context
 ) : FirestoreRecyclerAdapter<Message, MessageHolder>(options) {
 
     companion object {
@@ -51,7 +54,7 @@ class MessagesRecyclerAdapter internal constructor(
     }
 
     override fun onBindViewHolder(productViewHolder: MessageHolder, position: Int, productModel: Message) {
-        productViewHolder.setModel(productModel)
+        productViewHolder.setModel(productModel, context)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageHolder {

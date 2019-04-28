@@ -16,7 +16,7 @@
             app:layout_constraintTop_toTopOf="parent"
             android:text="Message"
             android:background="@drawable/message_txt_bg"
-            android:foreground="?attr/selectableItemBackground"
+            android:foreground="@drawable/message_txt_fg"
             android:clickable="true"
             android:focusable="true"
             android:focusableInTouchMode="true"
