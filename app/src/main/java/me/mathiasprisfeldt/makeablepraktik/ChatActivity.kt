@@ -68,16 +68,6 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener {
         messages.adapter = msgRecyclerAdapter
     }
 
-    override fun onConfigurationChanged(newConfig: Configuration?) {
-        super.onConfigurationChanged(newConfig)
-
-        if (newConfig?.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO) {
-            messages.scrollToPosition(messages.childCount - 1)
-        } else if (newConfig?.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_YES) {
-            messages.scrollToPosition(messages.childCount - 1)
-        }
-    }
-
     override fun onStart() {
         super.onStart()
         msgRecyclerAdapter.startListening()

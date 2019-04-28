@@ -1,17 +1,14 @@
 package me.mathiasprisfeldt.makeablepraktik.recycler_views
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-import me.mathiasprisfeldt.makeablepraktik.types.Message
 import me.mathiasprisfeldt.makeablepraktik.R
-import android.R.attr.label
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.support.v4.content.ContextCompat.getSystemService
-
+import me.mathiasprisfeldt.makeablepraktik.types.Message
 
 
 class MessageHolder internal constructor(private val view: View) : RecyclerView.ViewHolder(view) {

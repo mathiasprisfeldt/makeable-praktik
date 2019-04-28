@@ -79,6 +79,9 @@ class MainActivity : AppCompatActivity() {
         home_show_chatroom_list.setOnClickListener {
             chatroom_selector.requestFocus()
             chatroom_selector.showDropDown()
+
+            if (chatroom_selector.text.isNotEmpty())
+                (chatroom_selector.adapter as ArrayAdapter<*>).filter.filter(null)
         }
     }
 
@@ -102,6 +105,9 @@ class MainActivity : AppCompatActivity() {
             shouldHaveFocus?.requestFocus()
             return
         }
+
+        chatroom_selector.error = null
+        username.error = null
 
         val intent = Intent(this, ChatActivity::class.java).apply {
             putExtra(UsernameExtra, usernameTxt)
