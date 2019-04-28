@@ -6,9 +6,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
-import me.mathiasprisfeldt.makeablepraktik.types.Message
-import me.mathiasprisfeldt.makeablepraktik.services.ChatService
 import me.mathiasprisfeldt.makeablepraktik.R
+import me.mathiasprisfeldt.makeablepraktik.services.ChatService
+import me.mathiasprisfeldt.makeablepraktik.types.Message
+
+
+
 
 class MessagesRecyclerAdapter internal constructor(
     options: FirestoreRecyclerOptions<Message>,
@@ -22,20 +25,12 @@ class MessagesRecyclerAdapter internal constructor(
         const val TYPE_THEIR_MSG = 1
     }
 
-    private var atBottom: Boolean = true
-
     init {
-        messages.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-
-                atBottom = !recyclerView.canScrollVertically(1)
-            }
-        })
-
-        messages.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
-            if (atBottom) {
-                messages.scrollToPosition(itemCount - 1)
+        messages.addOnLayoutChangeListener { _, _, _, _, bottom, _, _, _, oldBottom ->
+            if (bottom < oldBottom) {
+                messages.post {
+                    messages.scrollToPosition(itemCount - 1)
+                }
             }
         }
 
@@ -44,7 +39,7 @@ class MessagesRecyclerAdapter internal constructor(
                 super.onItemRangeInserted(positionStart, itemCount)
                 val lastVisiblePosition = layoutManager.findLastCompletelyVisibleItemPosition()
 
-                if (lastVisiblePosition == -1 || positionStart >= itemCount - 1 && lastVisiblePosition == positionStart - 1) {
+                if ((lastVisiblePosition == -1 || positionStart >= itemCount - 1 && lastVisiblePosition == positionStart - 1)) {
                     messages.scrollToPosition(positionStart)
                 }
             }

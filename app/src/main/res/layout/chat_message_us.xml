@@ -6,8 +6,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/screen_border_margin"
         android:layout_marginEnd="@dimen/screen_border_margin"
-        android:layout_marginTop="@dimen/chat_message_spacing"
-        android:layout_marginBottom="@dimen/chat_message_spacing"
 >
     <TextView
             android:id="@+id/message_text"
@@ -18,10 +16,32 @@
             app:layout_constraintTop_toTopOf="parent"
             android:text="Message"
             android:background="@drawable/message_txt_bg"
+            android:foreground="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:padding="@dimen/chat_msg_padding"
             android:maxWidth="@dimen/chat_msg_max_width"
-            app:layout_constraintHorizontal_bias="1">
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintBottom_toTopOf="@+id/message_date"
+            app:layout_goneMarginBottom="@dimen/screen_border_margin_halfed"
+    >
 
     </TextView>
+
+    <TextView
+            android:id="@+id/message_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00-00-0000"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
+            app:layout_constraintEnd_toEndOf="@+id/message_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/message_text"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="@dimen/screen_border_margin"
+            android:visibility="gone"
+            android:alpha="0"
+    />
 
 </android.support.constraint.ConstraintLayout>

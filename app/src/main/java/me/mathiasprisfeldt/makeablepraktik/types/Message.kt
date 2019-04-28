@@ -10,6 +10,5 @@ data class Message(
     val from: String = "unknown",
     val date: Timestamp = Timestamp.now()
 ) {
-    val authorText: String
-        @Exclude get() = "$from - ${date.format()}"
+    fun dateFormatted(): String = date.format()
 }
