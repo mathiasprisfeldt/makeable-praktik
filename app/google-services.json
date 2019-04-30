@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "724202548426",
+    "firebase_url": "https://makeable-praktik.firebaseio.com",
+    "project_id": "makeable-praktik",
+    "storage_bucket": "makeable-praktik.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:724202548426:android:306e89ff1fd2d50d",
+        "android_client_info": {
+          "package_name": "me.mathiasprisfeldt.makeablepraktik"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "724202548426-fc3qtekda4auubf763usmiqkigfgmt2r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAW_avbLnVbqcJZ5SfWe2LKlqXj8kYCskE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "724202548426-fc3qtekda4auubf763usmiqkigfgmt2r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
